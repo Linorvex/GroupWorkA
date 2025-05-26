@@ -1,1 +1,228 @@
+*{
+  --primary-color: #7D5A50;
+  --secondary-color: #B4846C;
+  --accent-color: #E5B299;
+  --light-color: #FDF6F0;
+  --dark-color: #4A3B36;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+}
 
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    line-height: 1.6;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+}
+:root {
+display: flex;
+min-height: 100vh;
+box-sizing: border-box;
+
+}
+
+
+
+h1{
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
+}
+
+
+button{
+  padding: 10px 15px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.btnPrimary{
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btnDanger{
+  background-color: #e74c3c;
+  color: white;
+  margin-left: 4px;
+}
+.btnCancel{
+  border: 1px solid var(--primary-color);
+  background-color: white;
+  color: var(--primary-color);
+}
+
+th{
+  font-weight: 600;
+}
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+
+}
+th{
+    display: table-cell;
+    vertical-align: inherit;
+    unicode-bidi: isolate;    
+}
+
+thead{
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: var(--border-radius);
+}
+td{
+    display: table-cell;
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+}
+table{
+    display: table;
+    border-radius: 16px;
+}
+tr{
+  display: table-row;
+  border-bottom: 1px solid gray;  
+  
+}
+
+tbody{
+  display: table-row-group;
+  vertical-align: middle;
+  unicode-bidi: isolate;
+  border-color: inherit;
+}
+tbody tr {
+border-bottom: 1px solid #e0e0e0;
+background-color: white;
+}
+
+.mainContent{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-left: 250px;
+    padding: 20px;
+    transition: all 0.3s;
+    
+   
+    
+}
+
+.sideBar{
+    width: 250px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+    position: fixed;
+    height: 100vh;
+    transition: all 0.3s;
+}
+
+.sideBarHeader{
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navMenu{
+    list-style: none;
+    padding: 20px 0;
+}
+
+ul{
+  display: flex;
+  flex-direction: column;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  padding-inline-start: 40px;
+  unicode-bidi: isolate;
+  a{
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.inputsContainer{
+ display:flex;
+ flex-direction: column;
+ gap:24px;
+}
+
+.inputDiv{
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap:4px;
+  width: 100%;
+  
+}
+
+.descrInput{
+  height:100px;
+  padding-left: 8px;
+ 
+}
+
+label{
+font-weight: 500;
+}
+
+.formDiv{
+  border-radius:16px;
+  padding: 24px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(72, 72, 72, 0.2), 0 6px 20px 0 rgba(154, 152, 152, 0.19);
+}
+
+input{
+  border-radius: 6px;
+  height: 32px;
+  width: 100%;
+  border: 1px solid rgb(211, 207, 207);
+  padding-left: 8px;
+  outline: none;
+}
+
+.inputgroup{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.headerDiv{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  a{
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 13px;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+}
+
+.cardFooter{
+  display: flex;
+  gap: 8px;
+}
