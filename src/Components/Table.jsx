@@ -33,7 +33,6 @@ const deleteIngredient = (ingrID)=>{
 }
 
 
-
   return (
   <table>     
     <thead>
@@ -49,17 +48,17 @@ const deleteIngredient = (ingrID)=>{
     <tbody>
         {data.map((item)=>{
             const {id, data: ingredients} = item
-            const { name, price, flavor, strength, description } = ingredients;
-        //    console.log('Item:', item);
+
+           console.log('Item:', item);
         //    console.log('Ingredients:', ingredients);
 
             return(
                 <tr key={id}>
-                <td>{name}</td>
-                <td>{price}</td>
-                <td>{flavor}</td>
-                <td>{strength}</td>
-                <td>{description}</td>
+                <td>{ingredients.name}</td>
+                <td>{ingredients.price}</td>
+                <td>{ingredients.flavor}</td>
+                <td>{ingredients.strength}</td>
+                <td>{ingredients.description}</td>
                 <td>
                     <button className='btnPrimary' onClick={()=>setEditableIngredient({id, ...ingredients})}>Edit</button>
                     <button className='btnDanger' onClick={()=>deleteIngredient(id)}>Delete</button>

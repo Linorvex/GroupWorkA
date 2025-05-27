@@ -73,18 +73,13 @@ fetchData()
     setIngr(prev=> prev.filter(item => item.id !==id))
   }
 
-  // Update data function logic
-  const updateIngr = (id, updatedItem)=>{
-    console.log(Array.isArray(updatedItem))
-    setIngr(prev=>prev.map(item=>(item.id===id ? updatedItem : item)))
-  }
 
 
 return (
     <div className='mainContent'>
       <Header />
-      <Table data={ingr} onDelete={deleteIngr} onEdit={updateIngr} />
-      <FormCard onFormSubmit={postIngridients} onUpdate={updateIngr}/>
+      <Table data={ingr} onDelete={deleteIngr} />
+      <FormCard onFormSubmit={postIngridients} setIngr={setIngr}/>
     
     </div>
   )
