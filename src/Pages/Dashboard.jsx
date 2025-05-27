@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react';
 
 const Dashboard = () => {
-  return (
-    <div className='mainContent'>
-        <h1>Hey it's a Dashboard page, here</h1>
-    </div>
-  )
-}
 
-export default Dashboard
+  return (
+    <>
+    <h1>hello</h1>
+    </>
+  );
+};
+
+export default Dashboard;
