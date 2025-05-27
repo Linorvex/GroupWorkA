@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { IngredientsContext } from '../Contexts/IngredientContext';
 
-const FormCard = ({onFormSubmit, onUpdate}) => {
+const FormCard = ({onFormSubmit, setIngr}) => {
     const { editableIngredient, setEditableIngredient } = useContext(IngredientsContext);
 
     const initialState = {     
@@ -60,9 +60,18 @@ const FormCard = ({onFormSubmit, onUpdate}) => {
                 })
                 if (!response.ok) throw new Error('Failed to update ingredient');
                 const updatedData = await response.json();
+                if (updatedData) {
+                    const ingrResp = await fetch(`${BASE_URL}/resource/ingredients`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type':'application/json',
+                            'x-bypass-token': API_KEY,
+                            }
+                        })
+                        const jsonData = await ingrResp.json()
+                        setIngr(jsonData)
+                }
                 setEditableIngredient(null);
-                // Trigger parent update if needed
-                onUpdate(id,  updatedData);
             } catch (error) {
                 console.error(error);
             }
