@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IngredientsContext } from '../Contexts/IngredientContext';
+import useRequest from '../Hooks/useRequest';
 
 const BASE_URL = 'http://localhost:5000/api/v1';
 const API_KEY = 'YXBpS2V5U2VjcmV0';
 
 const AddCoffee = () => {
   const navigate = useNavigate();
+  const { editableIngredient, setEditableIngredient } = useContext(IngredientsContext);
+
   const [coffee, setCoffee] = useState({
     name: '',
     country: '',
@@ -16,44 +20,80 @@ const AddCoffee = () => {
   });
   const [previewImage, setPreviewImage] = useState('');
 
-  const handleChange = (e) => {
+
+// Set request method dynamically based on mode (add/edit)
+const { sendRequest } = useRequest({ method: editableIngredient ? 'PUT' : 'POST' });
+
+const handleChange = (e) => {
     const { name, value } = e.target;
     setCoffee({ ...coffee, [name]: value });
     if (name === 'imageUrl') setPreviewImage(value);
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch(`${BASE_URL}/resource/coffees`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-bypass-token': API_KEY,
-        },
-        body: JSON.stringify({ 
-          data: [{
-            ...coffee,
-            price: Number(coffee.price),
-            caffeine: Number(coffee.caffeine)
-          }]
-        })
-      });
-      
-      if (!response.ok) throw new Error('Failed to add coffee');
-      
-      navigate('/');
-    } catch (error) {
-      console.error('Error:', error.message);
-      alert('Failed to add coffee. Please check console for details.');
+
+    const coffeeData = {
+      ...coffee,
+      price: Number(coffee.price),
+      caffeine: Number(coffee.caffeine)
+    };
+
+    const payload = editableIngredient 
+      ? { data: coffeeData }  // PUT: data as object
+      : { data: [coffeeData] }; // POST: data as array
+
+    // const editedCoffee = {
+    //   data: {
+    //     ...coffee,
+    //     price: Number(coffee.price),
+    //     caffeine: Number(coffee.caffeine)
+    //   }
+    // }
+
+
+    const url = editableIngredient
+      ? `http://localhost:5000/api/v1/resource/coffees/${editableIngredient.id}`
+      : `http://localhost:5000/api/v1/resource/coffees`;
+
+      try {
+        await sendRequest(payload, url)
+        setEditableIngredient(null)
+        navigate('/')
+      } catch (error) {
+        console.log('Failed to submit coffee. See console for details.')
+      }
     }
-  };
+ 
+
+
+  useEffect(()=>{
+    if(editableIngredient){
+       setCoffee(editableIngredient.data || editableIngredient);
+       console.log('Editable:', editableIngredient);
+       setPreviewImage((editableIngredient.data || editableIngredient).imageUrl || '');
+    }else{
+      setCoffee({
+        name: '',
+        country: '',
+        description: '',
+        imageUrl: '',
+        price: '',
+        caffeine: ''
+          })
+        
+        setPreviewImage('');
+    }
+  }, [editableIngredient])
+
+
 
   return (
     <div className="mainContent">
       <div className="form-container">
         <div className="form-header">
-          <h2>Add New Coffee</h2>
+          <h2>{editableIngredient ? 'Edit Coffee' : 'Add New Coffee'}</h2>
           <button 
             onClick={() => navigate('/')} 
             className="back-button"
@@ -92,6 +132,7 @@ const AddCoffee = () => {
               value={coffee.description}
               onChange={handleChange}
               required
+              
             />
           </div>
 
@@ -139,7 +180,7 @@ const AddCoffee = () => {
           </div>
 
           <button type="submit" className="submit-button">
-            Add Coffee
+            {editableIngredient ? 'Update Coffee' : 'Add Coffee'}
           </button>
         </form>
       </div>
