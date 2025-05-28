@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import FormCard from '../Components/FormCard'
 import Table from '../Components/Table'
-import Header from '../Components/Header'
+import { Link } from 'react-router-dom'
 
 
 const BASE_URL = 'http://localhost:5000/api/v1'
@@ -77,7 +77,16 @@ fetchData()
 
 return (
     <div className='mainContent'>
-      <Header />
+      <div className='form-header'>
+        <h1>Manage Ingredients</h1>
+        <button 
+            onClick={() => navigate('/')} 
+            className="back-button"
+          >
+            Back To Dashboard
+          </button>
+      </div>
+      
       <Table data={ingr} onDelete={deleteIngr} />
       <FormCard onFormSubmit={postIngridients} setIngr={setIngr}/>
     

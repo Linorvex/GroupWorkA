@@ -55,12 +55,18 @@ button{
 .btnPrimary{
   background-color: var(--primary-color);
   color: white;
+  &:hover{
+    background-color: var(--secondary-color);
+  }
 }
 
 .btnDanger{
   background-color: #e74c3c;
   color: white;
   margin-left: 4px;
+  &:hover{
+    background-color: rgb(152, 8, 8);
+  }
 }
 .btnCancel{
   border: 1px solid var(--primary-color);

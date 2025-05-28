@@ -42,15 +42,14 @@ const deleteIngredient = (ingrID)=>{
             <th>Flavour</th>
             <th>Strength</th>
             <th>Description</th>
-            <th>Action</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         {data.map((item)=>{
             const {id, data: ingredients} = item
-
-           console.log('Item:', item);
-        //    console.log('Ingredients:', ingredients);
+        //    console.log('Item:', item);
+ 
 
             return(
                 <tr key={id}>
